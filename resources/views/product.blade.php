@@ -306,8 +306,9 @@ body{
 </head>
 
 <body>
+    <a class="center" href="/logout">Logout</a>
 <div class="container">
-    <a href="/cart"><div class="cart">cart:<span class="cart-count"><?php echo (isset($cart_count) && $cart_count>0 )?$cart_count:0?></span></div></a>
+    <a  href="/cart"><div class="cart">cart:<span class="cart-count"><?php echo (isset($cart_count) && $cart_count>0 )?$cart_count:0?></span></div></a>
   <?php if(!empty($productlist)):?>
   <?php foreach($productlist as $product):?>
 <div class="col-xs-12 col-md-6">

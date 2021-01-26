@@ -49,12 +49,15 @@ class LoginController extends Controller
                    
                     if($user->role=='admin')
                     {
+
+
                          return redirect()->route('admin');
                     }
                     else
                     {
                        return redirect()->route('product');
                     }
+                     $request->session()->put('user_id', $user->id);
         } catch (Throwable $e) {
             report($e);
 
@@ -67,5 +70,13 @@ class LoginController extends Controller
     public function admin()
     {
         return view('admin');
+    }
+
+    public function logout(Request $request)
+    {
+        $request->session()->forget('user_id');
+
+        $request->session()->flush();
+         return view('login');
     }
 }

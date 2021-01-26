@@ -10,7 +10,7 @@ class productController extends Controller
     public function productList(Request $request)
     {
         	try {
-                $cart_count=count($request->session()->get('cart_items'));
+                $cart_count=(!empty($request->session()->get('cart_items')))?count($request->session()->get('cart_items')):0;
                 
             		$productList=product::paginate(2);
                     
@@ -44,6 +44,9 @@ class productController extends Controller
         
         $cart=$request->session()->get('cart_items');
         $product=[];
+         $product_desc_list=[];
+        if(!empty($cart))
+        {
         foreach($cart as $key=>$cartitem)
         {
             $indexes = array_keys($cart, $cartitem); //array(0, 1)
@@ -52,7 +55,7 @@ class productController extends Controller
             $product[$cartitem]['count']=$count;
             //$product[$cartitem] ['id']=$cartitem;
         }
-        $product_desc_list=[];
+       
         
         foreach($product as $key=>$val)
         {
@@ -74,6 +77,7 @@ class productController extends Controller
             
 
         }
+    }
        
         return view('cart',['productlist'=> $product_desc_list]);
         
@@ -95,5 +99,20 @@ class productController extends Controller
 
             return false;
         }
+    }
+
+    public function cartRemove(Request $request,$id)
+    {
+        $cart=$request->session()->get('cart_items');
+        if(!empty($cart))
+        {
+            if (in_array($id, $cart)) 
+                {
+                    unset($cart[array_search($id,$cart)]);
+                }
+        }
+       $request->session()->put('cart_items', $cart);
+
+        return redirect()->route('cart');
     }
 }

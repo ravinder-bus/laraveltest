@@ -104,6 +104,7 @@ span.price {
 }
 </style>
 <?php 
+
 if(!empty($productlist)){
 	$total=0;
  ?>
@@ -116,7 +117,7 @@ if(!empty($productlist)){
 
         ?>
 
-      <p><a href="#"><?php echo $prd['name'] ?></a> <span class="quantity"><?php echo $prd['count']?></span><span class="price">$<?php echo $prd['price']*$prd['count'] ?></span></p>
+      <p><a href="#"><?php echo $prd['name'] ?></a> <span class="quantity"><?php echo $prd['count']?></span><span class="price">$<?php echo $prd['price']*$prd['count'] ?></span></p><a href="/cart-remove/<?php echo $prd['id'] ?>">Remove</a>
       
       <?php } ?>
       <hr>

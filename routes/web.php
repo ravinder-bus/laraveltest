@@ -24,5 +24,6 @@ Route::post('/add-to-cart', 'productController@addtocart')->name('addtocart');
 Route::get('/cart', 'productController@cart')->name('cart');
 Route::get('/admin', 'Auth\LoginController@admin')->name('admin');
 Route::get('/product-description/{id}', 'productController@description')->name('admin');
-
+Route::get('/cart-remove/{id}', 'productController@cartRemove')->name('cartRemove');
+Route::get('/logout', 'Auth\LoginController@logout')->name('logout');
 //Route::get('/home', 'HomeController@index')->name('home');
